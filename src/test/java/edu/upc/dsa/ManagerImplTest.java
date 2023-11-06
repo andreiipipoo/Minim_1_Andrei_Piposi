@@ -3,6 +3,7 @@ package edu.upc.dsa;
 import edu.upc.dsa.exceptions.*;
 import edu.upc.dsa.models.Juego;
 import edu.upc.dsa.models.Usuario;
+import edu.upc.dsa.*;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
