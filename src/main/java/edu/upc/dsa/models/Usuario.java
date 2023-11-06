@@ -1,90 +1,60 @@
 package edu.upc.dsa.models;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.LinkedList;
 
 public class Usuario {
-    public static Map<String, Usuario> MapaUsuarios = new HashMap<>();
-    String id;
-    String nombre;
-    int puntuacionTotal;
-    private Partida partidaactual;
+    private String identificador;
+    private String nombre;
+    private Partida partidaActual;
+    private List<Partida> partidasJugadas;
 
-    public Usuario(String id, String nombre, int puntuacionTotal) {
-        this.id = id;
+    public Usuario(String idUsuario, String nombre) {
+        this.identificador = idUsuario;
         this.nombre = nombre;
-        this.puntuacionTotal = puntuacionTotal;
-        this.partidaactual = null;
+        this.partidaActual = null;
+        this.partidasJugadas = new ArrayList<>();
     }
+
     public Usuario() {
     }
-    public String getId() {
-        return id;
+
+    public String getIdentificador() {
+        return identificador;
     }
-    public void setId(String id) {
-        this.id = id;
-        MapaUsuarios.put(id, this);
+
+    public void setIdentificador(String identificador) {
+        this.identificador = identificador;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
-        MapaUsuarios.put(id, this);
     }
 
-    public int getPuntuacionTotal() {
-        return puntuacionTotal;
-    }
-    public void setPuntuacionTotal(int puntuacionTotal) {
-        this.puntuacionTotal = puntuacionTotal;
-        MapaUsuarios.put(id, this);
-    }
     public Partida getPartidaActual() {
-        return partidaactual;
-    }
-    public void setPartidaActual(Partida partidaactual) {
-        this.partidaactual = partidaactual;
-        MapaUsuarios.put(id, this);
+        return partidaActual;
     }
 
-
-    public void setJuego(String idJuego) {
-        this.partidaactual = new Partida(idJuego);
-        MapaUsuarios.put(id, this);
+    public void setPartidaActual(Partida partidaActual) {
+        this.partidaActual = partidaActual;
     }
 
-    public int getNivel() {
-        return this.partidaactual.getNivel();
+    public List<Partida> getPartidasJugadas() {
+        return partidasJugadas;
     }
 
-    public int getPuntuacion() {
-        return this.partidaactual.getPuntuacion();
+    public void setPartidasJugadas(List<Partida> partidasJugadas) {
+        this.partidasJugadas = partidasJugadas;
     }
 
-    public void setNivel() {
-        this.partidaactual.setNivel();
-        MapaUsuarios.put(id, this);
-    }
-
-    public void setPuntuacion(int puntosConseguidos) {
-        this.partidaactual.setPuntuacion(puntosConseguidos);
-        MapaUsuarios.put(id, this);
-    }
-
-    public void setFechaCambioNivel(String fechaCambioNivel) {
-        this.partidaactual.setFechaCambioNivel(fechaCambioNivel);
-        MapaUsuarios.put(id, this);
-    }
-
-    public List<String> getPartidas() {
-        List<String> listaPartidas = new ArrayList<>();
-        for (Map.Entry<String, Usuario> entry : MapaUsuarios.entrySet()) {
-            String key = entry.getKey();
-            Usuario value = entry.getValue();
-            listaPartidas.add(key);
-        }
-        return listaPartidas;
+    public void addPartidaJugada(Partida partida) {
+        this.partidasJugadas.add(partida);
     }
 }

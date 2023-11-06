@@ -1,37 +1,48 @@
 package edu.upc.dsa;
-import edu.upc.dsa.models.Estado;
-import edu.upc.dsa.exceptions.*;
+import edu.upc.dsa.models.Juego;
+import edu.upc.dsa.models.Partida;
+import edu.upc.dsa.models.Usuario;
 
 import java.util.List;
+
 
 public interface Manager {
 
     //Creación de un juego
-    void crearJuego(String id, String nombre, String descripcion, int numeroNiveles) throws JuegoException;
+    void crearJuego(String identificador, String descripcion, int numeroNiveles);
 
     //Inicio de una partida de un juego por parte de un usuario
-    void iniciarPartida(String idUsuario, String idJuego) throws JuegoException;
+    void iniciarPartida(String idUsuario, String idJuego);
 
-    //Consulta del nivel actual
-    int consultarNivel(String idUsuario) throws JuegoException;
+    //Consultar el nivel actual de un usuario en un juego
+    int consultarNivelActual(String idUsuario);
 
-    //Consulta de la puntuación actual
-    int consultarPuntuacion(String idUsuario) throws JuegoException;
+    //Consultar la puntuación de un usuario en un juego
+    int consultarPuntuacion(String idUsuario);
+
     //Pasar de nivel
-    void pasarNivel(String idUsuario,int puntosConseguidos,String fechaCambioNivel) throws JuegoException;
+    void pasarNivel(String idUsuario, int puntos, String fechaCambioNivel);
 
-    //Finalizar partida
-    void finalizarPartida(String idUsuario) throws JuegoException;
+    //Finalizar una partida
+    void finalizarPartida(String idUsuario);
 
-    //Consulta del estado de un juego
-    Estado consultarEstado(String idJuego) throws JuegoException;
+    //Consulta de usuarios que han participado en un juego ordenado
+    //por puntuación (descendente).
+    List<String> consultarRanking(String idJuego);
 
-    //Consulta de usuario que han participado en un juego ordenados por puntuación (descendentemente)
-    List<String> consultarRanking(String idJuego) throws JuegoException;
+    //Consulta de las partidas en las que ha participado un usuario
+    List<Partida> consultarPartidasPorUsuario(String idUsuario);
 
-    //Consulta de los juegos en los que ha participado un usuario
-    List<String> consultarPartidas(String idUsuario) throws JuegoException;
+    Usuario crearUsuario(String number, String nombre);
 
-     int numUsuarios();
-     int numJuegos();
+    int sizeJuegos();
+
+    int sizeUsuarios();
+
+    int size();
+
+    Juego getJuego(String idJuego);
+
+    Usuario getUsuario(String idUsuario);
+
 }
